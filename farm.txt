@@ -1,0 +1,1 @@
+Farm{farmName='a1', farmAddres='asdf', FarmBorder=Border{BorderPointLU=Point2D.Double[1000.0, 0.0], BorderPointRU=Point2D.Double[1000.0, 1000.0], BorderPointLD=Point2D.Double[0.0, 0.0], BorderPointRD=Point2D.Double[0.0, 1000.0]}, cash=333333.0, employees=[], buildings=[], machines=[], animals=[]}

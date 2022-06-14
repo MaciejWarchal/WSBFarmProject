@@ -1,4 +1,5 @@
 import area.*;
+import system.FileSystem;
 import system.Load;
 import system.Log;
 import system.MainMenu;
@@ -46,62 +47,27 @@ public class Main {
                 UserSuperUser admin = new UserSuperUser(id, name, true, Manager, Emp, pass);
 
                 system.FileSystem.SaveToFile(admin.toString(),"users.txt");
-/*
-                System.out.println("nalezy okreslic granice nowej farmy w [m] (przyjmoje tylko wartosci dodatnie, farma ma ksztalt prostokatu");
-                System.out.println("podaj polnocno-zachodni punkt graniczny");
 
-                System.out.println("x ");
-                double x1=getDouble();
-                System.out.println("y ");
-                double y1=getDouble();
-
-                Point2D lu = null;
-                        lu.setLocation(x1,y1);
-
-                System.out.println("podaj polnocno-wschodni punkt graniczny");
-
-                System.out.println("x ");
-                double x2=getDouble();
-                System.out.println("y ");
-                double y2=getDouble();
-
-                Point2D ru = null;
-                ru.setLocation(x2,y2);
-
-                System.out.println("podaj poludniowo-zachodni punkt graniczny");
-
-                System.out.println("x ");
-                double x3=getDouble();
-                System.out.println("y ");
-                double y3=getDouble();
-
-                Point2D ld = null;
-                ld.setLocation(x3,y3);
-
-                System.out.println("podaj poludniowo-wschodni punkt graniczny");
-
-                System.out.println("x ");
-                double x4=getDouble();
-                System.out.println("y ");
-                double y4=getDouble();
-
-                Point2D rd = null;
-                rd.setLocation(x4,y4);
+                System.out.println("Nalezy wprowadzić podstawowe dane farmy");
+                System.out.println("Podaj nazwe farmy");
+                String farmName=getString();
+                System.out.println("Podaj adres");
+                String farmAddres=getString();
+                System.out.println("Dostepne srodki finansowe");
+                double dostepneSrodkiFinansowe=getDouble();
+                Border farmBorder=Farm.createFarmBorder();
+                Farm A1= new Farm(farmName,farmAddres,farmBorder,dostepneSrodkiFinansowe);
+                FileSystem.SaveToFile(A1.toString(),"farm.txt");
 
 
 
 
-                Border farm=new Border(lu
-                ,ru,ld,rd);  */
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             } else {
                 User LOG=Log.logIn();
                // Load.loadEmployeesToFarm("users.txt");  // tutaj wczytujemy pracownikow z pliku txt
                 MainMenu.manuManager(LOG);
-
-
-
 
             }
         }

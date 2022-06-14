@@ -1,0 +1,2 @@
+
+User{id=1, name='asd', isSuperUser=true, isManager=false, isEmployee=false, password='1'}

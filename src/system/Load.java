@@ -1,8 +1,11 @@
 package system;
 
+import area.Border;
+import area.Farm;
 import humans.*;
 import users.User;
 
+import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,11 +49,64 @@ public class Load {
             }
 
         }
-
-
         return users;
+    }
+
+    public static Border loadfarmBorder(String farmPath) throws IOException {
+        String[] borderTab= new String[20];
+
+        borderTab=FileSystem.read(farmPath);
+        Border farm=null;
+
+        for (int i=0; i< borderTab.length;i++){    //Czytamy [i] lineie z pliku txt
+            if (borderTab[i]!=null){
+                Point2D LU= loadPoint2D("LU",borderTab[i]);
+                Point2D RU= loadPoint2D("RU",borderTab[i]);
+                Point2D LD= loadPoint2D("LD",borderTab[i]);
+                Point2D RD= loadPoint2D("RD",borderTab[i]);
+
+                Border Farm=new Border(LU,RU,LD,RD);
+                farm=Farm;
+
+            }
+        }
+        return farm;
+    }
+
+    public static Point2D loadPoint2D(String pointName,String borderTabi){
+        String beforeValue="=Point2D.Double";
+        String beforeWithPointName=pointName+beforeValue;
+        String pointCoordinates=TextSearching.findText(borderTabi,beforeWithPointName,']');
+        String x=TextSearching.findText(pointCoordinates,"[",',');
+        String y=TextSearching.findText(pointCoordinates,", ",' ');
+
+        Point2D point=new Point2D.Double(Double.parseDouble(x),Double.parseDouble(y));
+        return point;
 
     }
+
+    public static Farm loadfarm(String farmpath) throws IOException {
+
+        String[] farmsTab=new String[10];
+        farmsTab=FileSystem.read(farmpath);
+        Farm farm=null;
+
+        for (int i=0;i< farmsTab.length;i++){
+            if (farmsTab[i]!=null){
+                String name=TextSearching.findText(farmsTab[i],"farmName='",'\'');
+                String addres=TextSearching.findText(farmsTab[i],"farmAddres='",'\'');
+                Border farmBorder=loadfarmBorder(farmpath);
+                String cash=TextSearching.findText(farmsTab[i],"cash=",',');
+                Farm thisFarm=new Farm(name,addres,farmBorder,Double.parseDouble(cash));
+                farm=thisFarm;
+
+            }
+        }
+        return farm;
+    }
+
+
+
 
 
 

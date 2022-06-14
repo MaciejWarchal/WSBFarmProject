@@ -1,5 +1,6 @@
 package system;
 
+import area.Farm;
 import humans.Employee;
 import humans.Manager;
 import users.User;
@@ -137,9 +138,13 @@ public class MainMenu extends FileSystem {
                             }
                         }
 
-
-
                         break;
+                    }
+                    case 5:{
+                        Farm aa=Load.loadfarm("farm.txt");
+                        System.out.println(aa.toString());
+
+
                     }
                     case 6: {
                         LOG = null;

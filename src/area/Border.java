@@ -19,7 +19,6 @@ public class Border implements centerable {
         BorderPointRD = borderPointRD;
     }
 
-    // X i Y musi być dodatni trzeba będzie dodać zbezpiecznie!
     public Point2D findCenter(Point2D borderPointLU, Point2D borderPointRU, Point2D borderPointLD,
                                Point2D borderPointRD){
         double[] farmBorderx={BorderPointLU.getX(),BorderPointRU.getX(),BorderPointLD.getX(),BorderPointRD.getX()};
@@ -53,11 +52,28 @@ public class Border implements centerable {
             }
         }
 
-        double Xavg= Xmax+Xmin/2;   // ta średnia działa tylko dla liczb dodatinich
-        double Yavg= Ymax+Ymin/2;
+        double Xavg=avgt(Xmax,Xmin);
+        double Yavg=avgt(Ymax,Ymin);
         Point2D center= new Point2D.Double(Xavg, Yavg);
         return center;
 
+    }
+
+    public static double avgt(double a, double b) {
+        double avg;
+        if(a>0&&b>0){
+            avg=(a + b)/2;
+        }
+        else if (a<0&&b>0){
+            avg=((Math.abs(a)+b)/2)-Math.abs(a);
+        }
+        else if (a>0&&b<0){
+            avg=((a+Math.abs(b))/2)-Math.abs(b);
+        }
+        else {
+            avg=((Math.abs(a) + Math.abs(b)) / 2) * -1;
+        }
+        return avg;
     }
 
 
@@ -93,4 +109,15 @@ public class Border implements centerable {
     public Point2D getBorderPointRD() {
         return BorderPointRD;
     }
+
+    @Override
+    public String toString() {
+        return "Border{" +
+                "BorderPointLU=" + BorderPointLU +
+                ", BorderPointRU=" + BorderPointRU +
+                ", BorderPointLD=" + BorderPointLD +
+                ", BorderPointRD=" + BorderPointRD +
+                '}';
+    }
 }
+
