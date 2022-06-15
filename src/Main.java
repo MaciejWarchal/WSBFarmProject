@@ -66,7 +66,9 @@ public class Main {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             } else {
                 User LOG=Log.logIn();
-               // Load.loadEmployeesToFarm("users.txt");  // tutaj wczytujemy pracownikow z pliku txt
+                Farm farm1=Load.loadfarm("farm.txt");
+                farm1.setEmployees(Load.loadEmployeesToFarm("employess"));
+
                 MainMenu.manuManager(LOG);
 
             }

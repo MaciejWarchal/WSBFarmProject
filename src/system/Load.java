@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Load {
 
-    public static ArrayList<User> loadEmployeesToFarm(String path) throws IOException {
+    public static ArrayList<User> loadusersToFarm(String path) throws IOException {
         ArrayList<User>users=new ArrayList<>(10);
         String[] usersTab=new String[20];
 
@@ -52,6 +52,28 @@ public class Load {
         return users;
     }
 
+    public static ArrayList<Employee> loadEmployeesToFarm(String path) throws IOException {
+        ArrayList<Employee>employees=new ArrayList<>(10);
+
+        List<String>employeeList=new ArrayList<String>(10);
+
+        employeeList= List.of(FileSystem.read(path));
+
+
+        for (int i=0;i< employeeList.size();i++){
+            if (employeeList.get(i) !=null) {
+                String id=TextSearching.findText(employeeList.get(i), "id=", ',');
+                String name=TextSearching.findText(employeeList.get(i),"name='",'\'');
+                String phoneNumber=TextSearching.findText(employeeList.get(i),"phoneNumber=",',');
+                String age=TextSearching.findText(employeeList.get(i),"age=",'}');
+
+                employees.add(new Employee(Integer.parseInt(id),name,Integer.parseInt(phoneNumber),age));
+            }
+
+        }
+        return employees;
+    }
+
     public static Border loadfarmBorder(String farmPath) throws IOException {
         String[] borderTab= new String[20];
 
@@ -63,7 +85,7 @@ public class Load {
                 Point2D LU= loadPoint2D("LU",borderTab[i]);
                 Point2D RU= loadPoint2D("RU",borderTab[i]);
                 Point2D LD= loadPoint2D("LD",borderTab[i]);
-                Point2D RD= loadPoint2D("RD",borderTab[i]);
+                Point2D RD= loadLastPoint2D("RD",borderTab[i]);
 
                 Border Farm=new Border(LU,RU,LD,RD);
                 farm=Farm;
@@ -74,16 +96,28 @@ public class Load {
     }
 
     public static Point2D loadPoint2D(String pointName,String borderTabi){
-        String beforeValue="=Point2D.Double";
+        String beforeValue="=Point2D.Doubl";
         String beforeWithPointName=pointName+beforeValue;
-        String pointCoordinates=TextSearching.findText(borderTabi,beforeWithPointName,']');
-        String x=TextSearching.findText(pointCoordinates,"[",',');
-        String y=TextSearching.findText(pointCoordinates,", ",' ');
-
+        String pointCoordinates=TextSearching.findText(borderTabi,beforeWithPointName,'B');
+        String x=TextSearching.findText(pointCoordinates,"e[",',');
+        String XFindafter=x+", ";
+        String y=TextSearching.findText(pointCoordinates,XFindafter,']');
         Point2D point=new Point2D.Double(Double.parseDouble(x),Double.parseDouble(y));
         return point;
 
     }
+
+    public static Point2D loadLastPoint2D(String pointName,String borderTabi) {
+        String beforeValue = "=Point2D.Doubl";
+        String beforeWithPointName = pointName + beforeValue;
+        String pointCoordinates = TextSearching.findText(borderTabi, beforeWithPointName, '}');
+        String x = TextSearching.findText(pointCoordinates, "e[", ',');
+        String XFindafter = x + ", ";
+        String y = TextSearching.findText(pointCoordinates, XFindafter, ']');
+        Point2D point = new Point2D.Double(Double.parseDouble(x), Double.parseDouble(y));
+        return point;
+    }
+
 
     public static Farm loadfarm(String farmpath) throws IOException {
 

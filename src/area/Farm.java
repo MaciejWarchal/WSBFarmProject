@@ -81,6 +81,7 @@ public class Farm {
         return farm;
     }
 
+
     @Override
     public String toString() {
         return "Farm{" +
@@ -94,6 +95,7 @@ public class Farm {
                 ", animals=" + animals +
                 '}';
     }
+
 
     public static double getDouble(){
         return new Scanner(System.in).nextDouble();

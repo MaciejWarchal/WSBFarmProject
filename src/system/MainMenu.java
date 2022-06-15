@@ -87,7 +87,7 @@ public class MainMenu extends FileSystem {
                 System.out.println("2. dodaj pracownika do systemu");
                 System.out.println("3. wypisz wszystkich pracowników");
                 System.out.println("4. zbuduj budynek");
-                System.out.println("5. wypisz wszystkie budynki na farmie");
+                System.out.println("5. wypisz informacje o farmie farmie");
                 System.out.println("6. wyloguj i zakoncz program");
                 op = getInt();
 
@@ -141,10 +141,8 @@ public class MainMenu extends FileSystem {
                         break;
                     }
                     case 5:{
-                        Farm aa=Load.loadfarm("farm.txt");
-                        System.out.println(aa.toString());
-
-
+                        System.out.println(Load.loadfarm("farm.txt"));
+                        break;
                     }
                     case 6: {
                         LOG = null;

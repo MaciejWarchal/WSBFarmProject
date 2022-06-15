@@ -31,6 +31,9 @@ public class Employee extends Human {
         this.cash = cash;
     }
 
+    public Employee(int id, String name, int phoneNumber, String age) {
+        super(id, name, phoneNumber, Integer.parseInt(age));
+    }
 
 
     public double getWorkingHours() {
