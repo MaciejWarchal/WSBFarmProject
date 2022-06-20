@@ -1,4 +1,5 @@
 import area.*;
+import humans.Employee;
 import system.FileSystem;
 import system.Load;
 import system.Log;
@@ -9,12 +10,13 @@ import users.*;
 
 import java.awt.geom.Point2D;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[]args) throws FileNotFoundException, IOException {
-        System.out.println("Witamy w systemie zarządzania farmą");
 
+        System.out.println("Witamy w systemie zarządzania farmą");
 
 
         File user = new File("users.txt");  //sprawdzenie jezeli istnieje plik z danymi o urzytkownikach
@@ -56,8 +58,8 @@ public class Main {
                 System.out.println("Dostepne srodki finansowe");
                 double dostepneSrodkiFinansowe=getDouble();
                 Border farmBorder=Farm.createFarmBorder();
-                Farm A1= new Farm(farmName,farmAddres,farmBorder,dostepneSrodkiFinansowe);
-                FileSystem.SaveToFile(A1.toString(),"farm.txt");
+                Farm farm1= new Farm(farmName,farmAddres,farmBorder,dostepneSrodkiFinansowe);
+                FileSystem.SaveToFile(farm1.toString(),"farm.txt");
 
 
 
@@ -65,17 +67,18 @@ public class Main {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             } else {
+
                 User LOG=Log.logIn();
                 Farm farm1=Load.loadfarm("farm.txt");
-                farm1.setEmployees(Load.loadEmployeesToFarm("employess"));
-
-                MainMenu.manuManager(LOG);
+                farm1.setEmployees(Load.loadEmployeesToFarm("employees.txt"));
+                MainMenu.manuManager(LOG,farm1);
 
             }
         }
         catch(IllegalArgumentException e){
                 e.getStackTrace();
-                System.out.println("wysrapił bład podczas wprowadzania urzytkownika");
+                System.out.println("wysrapił bład w main ");
+                System.out.println(e);
         }
 
 

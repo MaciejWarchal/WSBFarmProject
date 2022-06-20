@@ -1,12 +1,17 @@
 package system;
 
+import area.Border;
+import area.Bulding;
 import area.Farm;
+import area.FreshWaterWell;
 import humans.Employee;
 import humans.Manager;
 import users.User;
 import users.UserEmployee;
 import users.UserManager;
 import users.UserSuperUser;
+
+import java.awt.geom.Point2D;
 import java.io.*;
 import java.util.Scanner;
 
@@ -77,7 +82,7 @@ public class MainMenu extends FileSystem {
         }
     }*/
 
-    public static void manuManager(User LOG) throws IOException {
+    public static void manuManager(User LOG,Farm FARM) throws IOException {
         int op=999999999;
         if (LOG!=null) {
             while (op != 0) {
@@ -125,7 +130,7 @@ public class MainMenu extends FileSystem {
 
                     case 3: {
                         String empTab[]=new String[20];
-                        empTab=read("employess.txt");
+                        empTab=read("employees.txt");
                         String end="";
                         while (!(end.equals("t")))
                         for (int i=0;i<empTab.length; i++){
@@ -137,7 +142,46 @@ public class MainMenu extends FileSystem {
                                 break;
                             }
                         }
+                        break;
+                    }
+                    case 4:{
+                        String end="";
+                        int op1=0;
+                        while (!(end.equals("t"))) {
+                            System.out.println("1. Zbuduj studnie");
+                            System.out.println("2. Zbuduj spichlerz");
+                            System.out.println("3. Zasadz pole");
+                            op1=getInt();
+                            switch (op1){
+                                case 1:{
+                                    System.out.println("podaj numer budynku");
+                                    int number=getInt();
+                                    System.out.println("ustaw granice obiektu");
+                                    Border border=new Border();
+                                    border=Bulding.createBorder();
+                                    if (border.checkBorder(FARM.getFarmBorder())){
+                                        System.out.println("obiekt ustawiono poprawnie");
+                                        System.out.println("podaj koszt inwestycji");
+                                        double price=getDouble();
+                                        System.out.println("podaj ilosc wody wytwarzanej na dzien w [m3]");
+                                        double waterproduction=getDouble();
+                                        System.out.println("podaj pojemnosc studni w [m3]");
+                                        double waterCapacity=getDouble();
 
+                                        FreshWaterWell well=new FreshWaterWell(number,border,price,waterproduction,waterCapacity);
+                                        System.out.println("obiekt wybudowano");
+
+                                    } else {
+                                        System.out.println("obietk po za granicami farmy");
+                                        break;
+                                    }
+                                }
+                            }
+
+
+                            System.out.println("czy powrocic do glownego manu[t/n]");
+                            end = getString();
+                        }
                         break;
                     }
                     case 5:{
@@ -150,15 +194,9 @@ public class MainMenu extends FileSystem {
                         System.exit(0);           // status "0" bo wychodzimy bez bledow.
 
                     }
-
-
                 }
             }
-
-
         }
-
-
     }
 
 
@@ -183,7 +221,7 @@ public class MainMenu extends FileSystem {
             Employee employee = new Employee(Integer.parseInt(id), name, ph, ag, sal,
                     sal, 0, 0, 0, 0,
                     0, 0, null, 0);
-            FileSystem.SaveToFile(employee.toString(),"employess.txt");
+            FileSystem.SaveToFile(employee.toString(),"employees.txt");
 
             UserEmployee Employee= new UserEmployee(Integer.parseInt(id),name,false,false,
                     true,pass);
@@ -218,7 +256,7 @@ public class MainMenu extends FileSystem {
             Manager manager = new Manager(Integer.parseInt(id),name, ph, ag,sal,sal,0,
                     0, 0, 0, 0, 0, null,
                     0, null);
-            FileSystem.SaveToFile(manager.toString(),"employess.txt");
+            FileSystem.SaveToFile(manager.toString(),"employees.txt");
             System.out.println(manager.toString());
 
             UserManager Manager=new UserManager(Integer.parseInt(id),name,false, true, false, pass);

@@ -3,14 +3,15 @@ package area;
 
 import java.awt.geom.Point2D;
 
-public class Border implements centerable {
+public class Border {
 
-    private Point2D BorderPointLU;    // // X i Y musi być dodatni trzeba będzie dodać zbezpiecznie!
+    private Point2D BorderPointLU;
     private Point2D BorderPointRU;
     private Point2D BorderPointLD;
     private Point2D BorderPointRD;
 
-
+    public Border() {
+    }
 
     public Border(Point2D borderPointLU, Point2D borderPointRU, Point2D borderPointLD, Point2D borderPointRD) {
         BorderPointLU = borderPointLU;
@@ -19,62 +20,9 @@ public class Border implements centerable {
         BorderPointRD = borderPointRD;
     }
 
-    public Point2D findCenter(Point2D borderPointLU, Point2D borderPointRU, Point2D borderPointLD,
-                               Point2D borderPointRD){
-        double[] farmBorderx={BorderPointLU.getX(),BorderPointRU.getX(),BorderPointLD.getX(),BorderPointRD.getX()};
-        double[] farmBordery={BorderPointLU.getY(),BorderPointRU.getY(),BorderPointLD.getY(),BorderPointRD.getY()};
 
-        double Xmax=farmBorderx[0];
-        for (int i=1;i<4;i++){
-            if (farmBorderx[i]>Xmax){
-                Xmax=farmBorderx[i];
-            }
-        }
 
-        double Xmin=farmBorderx[0];
-        for (int i=1;i<4;i++){
-            if (farmBorderx[i]<Xmin){
-                Xmin=farmBorderx[i];
-            }
-        }
 
-        double Ymax=farmBordery[0];
-        for (int i=1;i<4;i++){
-            if (farmBordery[i]>Ymax){
-                Ymax=farmBorderx[i];
-            }
-        }
-
-        double Ymin=farmBordery[0];
-        for (int i=1;i<4;i++){
-            if (farmBordery[i]<Ymin){
-                Ymin=farmBordery[i];
-            }
-        }
-
-        double Xavg=avgt(Xmax,Xmin);
-        double Yavg=avgt(Ymax,Ymin);
-        Point2D center= new Point2D.Double(Xavg, Yavg);
-        return center;
-
-    }
-
-    public static double avgt(double a, double b) {
-        double avg;
-        if(a>0&&b>0){
-            avg=(a + b)/2;
-        }
-        else if (a<0&&b>0){
-            avg=((Math.abs(a)+b)/2)-Math.abs(a);
-        }
-        else if (a>0&&b<0){
-            avg=((a+Math.abs(b))/2)-Math.abs(b);
-        }
-        else {
-            avg=((Math.abs(a) + Math.abs(b)) / 2) * -1;
-        }
-        return avg;
-    }
 
 
 
@@ -119,5 +67,60 @@ public class Border implements centerable {
                 ", BorderPointRD=" + BorderPointRD +
                 '}';
     }
+    public boolean checkBorder(Border farmBorder){
+
+        double[] farmBorderx={farmBorder.getBorderPointLU().getX(),farmBorder.getBorderPointRU().getX(),
+                farmBorder.getBorderPointLD().getX(),farmBorder.getBorderPointRD().getX()};
+        double[] farmBordery={farmBorder.getBorderPointLU().getY(),farmBorder.getBorderPointRU().getY(),
+                farmBorder.getBorderPointRD().getY(),farmBorder.getBorderPointLD().getY()};
+        double[] thisBorderx={this.getBorderPointLU().getX(),this.getBorderPointRU().getX(),
+                this.getBorderPointLD().getX(),this.getBorderPointRD().getX()};
+        double[] thisBordery={this.getBorderPointLU().getY(),this.getBorderPointRU().getY(),
+                this.getBorderPointLD().getY(),this.getBorderPointRD().getY()};
+
+        double Xmax=farmBorderx[0];
+        for (int i=1;i<4;i++){
+            if (farmBorderx[i]>Xmax){
+                Xmax=farmBorderx[i];
+            }
+        }
+
+        double Xmin=farmBorderx[0];
+        for (int i=1;i<4;i++){
+            if (farmBorderx[i]<Xmin){
+                Xmin=farmBorderx[i];
+            }
+        }
+
+        double Ymax=farmBordery[0];
+        for (int i=1;i<4;i++){
+            if (farmBordery[i]>Ymax){
+                Ymax=farmBorderx[i];
+            }
+        }
+
+        double Ymin=farmBordery[0];
+        for (int i=1;i<4;i++){
+            if (farmBordery[i]<Ymin){
+                Ymin=farmBordery[i];
+            }
+        }
+
+        if     ((this.getBorderPointLU().getX()<Xmin || this.getBorderPointLU().getX()>Xmax)||
+                (this.getBorderPointLU().getY()<Ymin || this.getBorderPointLU().getY()>Ymax)||
+                (this.getBorderPointRU().getX()<Xmin || this.getBorderPointRU().getX()>Xmax)||
+                (this.getBorderPointRU().getY()<Ymin || this.getBorderPointRU().getY()>Ymax)||
+                (this.getBorderPointLD().getX()<Xmin || this.getBorderPointLD().getX()>Xmax)||
+                (this.getBorderPointLD().getY()<Ymin || this.getBorderPointLD().getY()>Ymax)||
+                (this.getBorderPointRD().getX()<Xmin || this.getBorderPointRD().getX()>Xmax)||
+                (this.getBorderPointRD().getY()<Ymin || this.getBorderPointRD().getY()>Ymax))
+        {
+            throw new IndexOutOfBoundsException("obiekt po za granicami farmy");
+        } else {
+            return true;
+        }
+    }
+
+
 }
 

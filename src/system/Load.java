@@ -8,6 +8,7 @@ import users.User;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Load {
@@ -55,9 +56,7 @@ public class Load {
     public static ArrayList<Employee> loadEmployeesToFarm(String path) throws IOException {
         ArrayList<Employee>employees=new ArrayList<>(10);
 
-        List<String>employeeList=new ArrayList<String>(10);
-
-        employeeList= List.of(FileSystem.read(path));
+        List<String> employeeList = Arrays.asList(FileSystem.read(path));
 
 
         for (int i=0;i< employeeList.size();i++){
@@ -67,11 +66,16 @@ public class Load {
                 String phoneNumber=TextSearching.findText(employeeList.get(i),"phoneNumber=",',');
                 String age=TextSearching.findText(employeeList.get(i),"age=",'}');
 
+                int ID=Integer.parseInt(id);
+                int phone=Integer.parseInt(phoneNumber);
+                System.out.println(ID);
+                System.out.println(phone);
+
                 employees.add(new Employee(Integer.parseInt(id),name,Integer.parseInt(phoneNumber),age));
             }
 
         }
-        return employees;
+        return employees ;
     }
 
     public static Border loadfarmBorder(String farmPath) throws IOException {

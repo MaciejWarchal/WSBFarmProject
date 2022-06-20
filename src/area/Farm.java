@@ -15,13 +15,13 @@ public class Farm {
     private Border FarmBorder;
     private Double cash;
 
-    private List<Employee>employees=new ArrayList<>(10);
+    private ArrayList<Employee>employees;
 
-    private List<Bulding>buildings=new ArrayList<>(15);
+    private ArrayList<Bulding>buildings;
 
-    private List<Machine>machines=new ArrayList<>(10);
+    private List<Machine>machines;
 
-    private List<Animal>animals=new ArrayList<>(15);
+    private List<Animal>animals;
 
     public Farm(String farmName, String farmAddres, Border farmBorder, Double cash) {
         this.farmName = farmName;
@@ -34,7 +34,7 @@ public class Farm {
         return FarmBorder;
     }
 
-    public void setEmployees(List<Employee> employees) {
+    public void setEmployees(ArrayList<Employee> employees) {
         this.employees = employees;
     }
 

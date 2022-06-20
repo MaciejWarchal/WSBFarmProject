@@ -1,24 +1,29 @@
 package area;
 
 import java.awt.geom.Point2D;
+import java.util.Scanner;
 
-public abstract class Bulding {
+public abstract class Bulding implements centerable,checkBorder{
 
-    private int number;
-    private Border border;
-    private double price;
+    protected int number;
+    protected Border border;
+    protected Point2D center;
+    protected double price;
 
     public Border getBorder() {
         return this.border;
     }
 
-    public Bulding(int number, Border border, double price) {
-        this.number = number;
-        this.border = border;
-        this.price = price;
+    public void setCenter(Point2D center) {
+        this.center = center;
     }
 
-
+    public Bulding(int number, Border border, Point2D center, double price) {
+        this.number = number;
+        this.border = border;
+        this.center = center;
+        this.price = price;
+    }
 
     public boolean checkBorder(Border farmBorder, Border thisBorder){
 
@@ -72,15 +77,62 @@ public abstract class Bulding {
             } else {
             return true;
             }
-
-
-
-
     }
 
+    public static Border createBorder(){
+        System.out.println("nalezy okreslic granice nowego budynku w [m] (budynek zawsze ma ksztalt prostokatu");
+        System.out.println("podaj polnocno-zachodni punkt graniczny");
 
+        System.out.println("x ");
+        double x1=getDouble();
+        System.out.println("y ");
+        double y1=getDouble();
 
+        Point2D lu= new Point2D.Double(x1,y1);
 
+        System.out.println("podaj polnocno-wschodni punkt graniczny");
+
+        System.out.println("x ");
+        double x2=getDouble();
+        System.out.println("y ");
+        double y2=getDouble();
+
+        Point2D ru = new Point2D.Double(x2,y2);
+
+        System.out.println("podaj poludniowo-zachodni punkt graniczny");
+
+        System.out.println("x ");
+        double x3=getDouble();
+        System.out.println("y ");
+        double y3=getDouble();
+
+        Point2D ld = new Point2D.Double(x3,y3);
+
+        System.out.println("podaj poludniowo-wschodni punkt graniczny");
+
+        System.out.println("x ");
+        double x4=getDouble();
+        System.out.println("y ");
+        double y4=getDouble();
+
+        Point2D rd = new Point2D.Double(x4,y4);
+        Border farm=new Border(lu,ru,ld,rd);
+        return farm;
+    }
+
+    @Override
+    public String toString() {
+        return "Bulding{" +
+                "number=" + number +
+                ", border=" + border +
+                ", center=" + center +
+                ", price=" + price +
+                '}';
+    }
+
+    public static double getDouble(){
+        return new Scanner(System.in).nextDouble();
+    }
 }
 
 
