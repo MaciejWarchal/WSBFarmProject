@@ -1,6 +1,7 @@
 package system;
 
 import area.Border;
+import area.Bulding;
 import area.Farm;
 import humans.*;
 import users.User;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Load {
 
@@ -97,6 +99,31 @@ public class Load {
             }
         }
         return farm;
+
+
+    }
+
+    public static Border loadBuldingBorder(String Path) throws IOException {
+        String[] borderTab= new String[20];
+
+        borderTab=FileSystem.read(Path);
+        Border buldingBorder=null;
+
+        for (int i=0; i< borderTab.length;i++){    //Czytamy [i] lineie z pliku txt
+            if (borderTab[i]!=null){
+                Point2D LU= loadPoint2D("LU",borderTab[i]);
+                Point2D RU= loadPoint2D("RU",borderTab[i]);
+                Point2D LD= loadPoint2D("LD",borderTab[i]);
+                Point2D RD= loadLastPoint2D("RD",borderTab[i]);
+
+                buldingBorder=new Border(LU,RU,LD,RD);
+
+            }else {
+                System.out.println("nie utworzono granic budynku");
+                return null;
+            }
+        }
+      return buldingBorder;
     }
 
     public static Point2D loadPoint2D(String pointName,String borderTabi){
@@ -143,9 +170,34 @@ public class Load {
         return farm;
     }
 
+    public static ArrayList loadWellToFarm(String path) throws IOException {
+        ArrayList<Bulding> buldings=new ArrayList<>(10);
+        String[] buildingsTab=new String[50];
+        buildingsTab=FileSystem.read("buldings.txt");
+
+        for (int i=0; i<buildingsTab.length;i++){
+            if (buildingsTab[i]!=null){
+                String number=getString();
 
 
 
+            }
 
+        }
+        return buldings;
+    }
+
+    public static String getString(){
+        return new Scanner(System.in).next();
+    }
+    public static int getInt(){
+        return new Scanner(System.in).nextInt();
+    }
+    public static boolean getBoolean(){
+        return new Scanner(System.in).nextBoolean();
+    }
+    public static double getDouble(){
+        return new Scanner(System.in).nextDouble();
+    }
 
 }

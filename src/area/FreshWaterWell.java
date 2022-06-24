@@ -1,6 +1,11 @@
 package area;
+import system.Load;
+
+import system.FileSystem;
+import system.InputMethods;
 
 import java.awt.geom.Point2D;
+import java.util.Scanner;
 
 public class FreshWaterWell extends Bulding implements centerable,checkBorder{
 

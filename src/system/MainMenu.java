@@ -169,13 +169,14 @@ public class MainMenu extends FileSystem {
                                         double waterCapacity=getDouble();
 
                                         FreshWaterWell well=new FreshWaterWell(number,border,price,waterproduction,waterCapacity);
+                                        FileSystem.SaveToFile(well.toString(),"buldings.txt");
                                         System.out.println("obiekt wybudowano");
-
                                     } else {
                                         System.out.println("obietk po za granicami farmy");
                                         break;
                                     }
                                 }
+
                             }
 
 
