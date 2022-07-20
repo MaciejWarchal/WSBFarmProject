@@ -13,7 +13,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class Main implements Serializable{
     public static void main(String[]args) throws FileNotFoundException, IOException {
 
         System.out.println("Witamy w systemie zarządzania farmą");
@@ -67,11 +67,26 @@ public class Main {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             } else {
+                ArrayList<Object>buldingsL=new ArrayList<Object>();
 
                 User LOG=Log.logIn();
                 Farm farm1=Load.loadfarm("farm.txt");
                 farm1.setEmployees(Load.loadEmployeesToFarm("employees.txt"));
-                MainMenu.manuManager(LOG,farm1);
+                try {
+                    ObjectInputStream o=new ObjectInputStream(new FileInputStream("buldings.bin"));
+                    buldingsL= (ArrayList<Object>) o.readObject();
+                    o.close();
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+                for (Object buldings:buldingsL){
+                    System.out.println(buldings);
+                }
+
+                System.out.println();
+
+
+                MainMenu.manuManager(LOG,farm1,buldingsL);
 
             }
         }
@@ -80,8 +95,6 @@ public class Main {
                 System.out.println("wysrapił bład w main ");
                 System.out.println(e);
         }
-
-
     }
 
 

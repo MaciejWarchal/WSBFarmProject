@@ -2,8 +2,9 @@ package area;
 
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 
-public class Border {
+public class Border implements Serializable {
 
     private Point2D BorderPointLU;
     private Point2D BorderPointRU;

@@ -1,9 +1,10 @@
 package area;
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.Scanner;
 
-public abstract class Bulding implements centerable,checkBorder{
+public abstract class Bulding implements centerable,checkBorder, Serializable {
 
     protected int number;
     protected Border border;
@@ -16,6 +17,9 @@ public abstract class Bulding implements centerable,checkBorder{
 
     public void setCenter(Point2D center) {
         this.center = center;
+    }
+
+    public Bulding() {      // konstruktor domyslny na potrzeby serializacji
     }
 
     public Bulding(int number, Border border, Point2D center, double price) {

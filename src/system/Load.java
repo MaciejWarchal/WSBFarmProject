@@ -17,7 +17,7 @@ public class Load {
 
     public static ArrayList<User> loadusersToFarm(String path) throws IOException {
         ArrayList<User>users=new ArrayList<>(10);
-        String[] usersTab=new String[20];
+        String[] usersTab=new String[FileSystem.read(path).length];
 
         usersTab=FileSystem.read(path);
 
@@ -81,7 +81,7 @@ public class Load {
     }
 
     public static Border loadfarmBorder(String farmPath) throws IOException {
-        String[] borderTab= new String[20];
+        String[] borderTab= new String[FileSystem.read(farmPath).length];
 
         borderTab=FileSystem.read(farmPath);
         Border farm=null;
@@ -103,10 +103,10 @@ public class Load {
 
     }
 
-    public static Border loadBuldingBorder(String Path) throws IOException {
-        String[] borderTab= new String[20];
+    public static Border loadBuldingBorder(String path) throws IOException {
+        String[] borderTab= new String[FileSystem.read(path).length];
 
-        borderTab=FileSystem.read(Path);
+        borderTab=FileSystem.read(path);
         Border buldingBorder=null;
 
         for (int i=0; i< borderTab.length;i++){    //Czytamy [i] lineie z pliku txt
@@ -152,7 +152,7 @@ public class Load {
 
     public static Farm loadfarm(String farmpath) throws IOException {
 
-        String[] farmsTab=new String[10];
+        String[] farmsTab=new String[FileSystem.read(farmpath).length];
         farmsTab=FileSystem.read(farmpath);
         Farm farm=null;
 
@@ -170,21 +170,20 @@ public class Load {
         return farm;
     }
 
-    public static ArrayList loadWellToFarm(String path) throws IOException {
+    public static Bulding loadBuldingToFarm(String path,Bulding buldingType) throws IOException {
         ArrayList<Bulding> buldings=new ArrayList<>(10);
-        String[] buildingsTab=new String[50];
-        buildingsTab=FileSystem.read("buldings.txt");
+
+        String[] buildingsTab=new String[FileSystem.read(path).length];
+        buildingsTab=FileSystem.read(path);
 
         for (int i=0; i<buildingsTab.length;i++){
             if (buildingsTab[i]!=null){
-                String number=getString();
-
-
-
+                String thisnumber=TextSearching.findText(buildingsTab[i],"number=",',');
+                Border thisBorder=Load.loadBuldingBorder(path);      // tu potrzebne będą importy przy migracji
+                String thisPrice=TextSearching.findText(buildingsTab[i],"price=",',');
             }
-
         }
-        return buldings;
+        return null;
     }
 
     public static String getString(){
