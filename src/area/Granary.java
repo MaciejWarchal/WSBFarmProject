@@ -23,7 +23,7 @@ public class Granary extends Bulding{
     public static Granary build(Farm FARM){
         ArrayList<Object> buldingsR=new ArrayList<Object>();
         try {
-            ObjectInputStream o=new ObjectInputStream(new FileInputStream("buldings.bin"));
+            ObjectInputStream o=new ObjectInputStream(new FileInputStream("Buldings.src"));
             buldingsR= (ArrayList<Object>) o.readObject();
             o.close();
         } catch (Exception e){

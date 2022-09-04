@@ -4,11 +4,14 @@ import humans.*;
 import machines.Machine;
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Farm {
+public class Farm implements Serializable {
+
+    // Obiekt farma został utorzony w main, w tej klasie jest tylko tworzenie granic farmy w metodzie statycznej.
 
     private String farmName;
     private String farmAddres;

@@ -42,7 +42,7 @@ public class Garage extends Bulding implements Serializable {
             garage= new Garage(number,border,price,quantityOfVehicles);
 
             try {
-                ObjectOutputStream o=new ObjectOutputStream(new FileOutputStream("buldings.bin",false));
+                ObjectOutputStream o=new ObjectOutputStream(new FileOutputStream("Buldings.src",false));
                 buldingsR.add(garage);
                 o.writeObject(buldingsR);
                 o.close();

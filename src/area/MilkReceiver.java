@@ -43,7 +43,7 @@ public class MilkReceiver extends Bulding implements Serializable {
             milkReceiver=new MilkReceiver(number,border,price,milkCapacity,amoutOfMilkInReceiver);
 
             try {
-                ObjectOutputStream o=new ObjectOutputStream(new FileOutputStream("buldings.bin",false));
+                ObjectOutputStream o=new ObjectOutputStream(new FileOutputStream("Buldings.src",false));
                 buldingsR.add(milkReceiver);
                 o.writeObject(buldingsR);
                 o.close();

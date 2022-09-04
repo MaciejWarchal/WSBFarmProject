@@ -1,19 +1,16 @@
 import area.*;
 import humans.Employee;
-import system.FileSystem;
-import system.Load;
-import system.Log;
-import system.MainMenu;
-import system.TextSearching;
-
+import system.*;
+import machines.*;
 import users.*;
 
 import java.awt.geom.Point2D;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main implements Serializable{
+public class Main{
     public static void main(String[]args) throws FileNotFoundException, IOException {
 
         System.out.println("Witamy w systemie zarządzania farmą");
@@ -21,6 +18,8 @@ public class Main implements Serializable{
 
         File user = new File("users.txt");  //sprawdzenie jezeli istnieje plik z danymi o urzytkownikach
         boolean exist = user.exists();
+
+        //jeżeli plik nie istnieje przechodzimy do utworzenia pierwszego użytkownika
 
         try {
 
@@ -50,6 +49,8 @@ public class Main implements Serializable{
 
                 system.FileSystem.SaveToFile(admin.toString(),"users.txt");
 
+                //Tutaj tworzymy obiekt farme
+
                 System.out.println("Nalezy wprowadzić podstawowe dane farmy");
                 System.out.println("Podaj nazwe farmy");
                 String farmName=getString();
@@ -59,33 +60,30 @@ public class Main implements Serializable{
                 double dostepneSrodkiFinansowe=getDouble();
                 Border farmBorder=Farm.createFarmBorder();
                 Farm farm1= new Farm(farmName,farmAddres,farmBorder,dostepneSrodkiFinansowe);
-                FileSystem.SaveToFile(farm1.toString(),"farm.txt");
+                FileSystem.SaveToFile(farm1.toString(),"farm.txt"); //wlasna metoda na zapis obiektów for fun :)
+                ArrayList<Object> buldingsL= new ArrayList<>(10); //pusta lista obiektów, na przyszłe potrzeby serializacji.
+                Serialize.serialize(buldingsL);
 
 
+                // Jeżeli istnieje użutkownik zapisany w pliku users.txt to odczytujemy użytkownika z pilku users.txt
 
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             } else {
-                ArrayList<Object>buldingsL=new ArrayList<Object>();
+
 
                 User LOG=Log.logIn();
-                Farm farm1=Load.loadfarm("farm.txt");
+                Farm farm1=Load.loadfarm("farm.txt"); // odzczytujemy informacje o wcześniej utworzonej farmie
                 farm1.setEmployees(Load.loadEmployeesToFarm("employees.txt"));
-                try {
-                    ObjectInputStream o=new ObjectInputStream(new FileInputStream("buldings.bin"));
-                    buldingsL= (ArrayList<Object>) o.readObject();
-                    o.close();
-                } catch (Exception e){
-                    e.printStackTrace();
+                ArrayList<Object> buldingsL=new ArrayList<>(10);
+
+                    //Odczytujemy budynki utworzone wcześniej na farmie za pomocą mechanizmu serializacji
+
+                buldingsL=Deserialize.deserialize(buldingsL);
+
+                System.out.println("test");
+
+                for (int i=0; i<buldingsL.size(); i++){
+                    System.out.println(buldingsL.get(i));
                 }
-                for (Object buldings:buldingsL){
-                    System.out.println(buldings);
-                }
-
-                System.out.println();
-
-
                 MainMenu.manuManager(LOG,farm1,buldingsL);
 
             }

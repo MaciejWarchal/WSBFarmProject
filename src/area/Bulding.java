@@ -2,7 +2,9 @@ package area;
 
 import java.awt.geom.Point2D;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Scanner;
+import java.time.LocalDateTime;
 
 public abstract class Bulding implements centerable,checkBorder, Serializable {
 
@@ -10,6 +12,7 @@ public abstract class Bulding implements centerable,checkBorder, Serializable {
     protected Border border;
     protected Point2D center;
     protected double price;
+    protected LocalDateTime dateOfConstruction;
 
     public Border getBorder() {
         return this.border;
@@ -27,6 +30,7 @@ public abstract class Bulding implements centerable,checkBorder, Serializable {
         this.border = border;
         this.center = center;
         this.price = price;
+        this.dateOfConstruction=LocalDateTime.now();
     }
 
     public boolean checkBorder(Border farmBorder, Border thisBorder){

@@ -6,12 +6,12 @@ import humans.Manager;
 import users.User;
 import users.UserEmployee;
 import users.UserManager;
-
+import java.time.LocalDateTime;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MainMenu extends FileSystem implements Serializable {
+public class MainMenu extends FileSystem {
     /*public static void main(String[]args) throws FileNotFoundException, IOException {
         System.out.println("Witamy w systemie zarządzania farmą main manu");
 
@@ -79,125 +79,163 @@ public class MainMenu extends FileSystem implements Serializable {
     }*/
 
     public static void manuManager(User LOG, Farm FARM, ArrayList<Object> buldingsL) throws IOException {
+        LocalDateTime systemDataTime= LocalDateTime.now();
+
         int op = 999999999;
-        buldingsL = new ArrayList<Object>(10);
+
+
         if (LOG != null) {
             while (op != 0) {
+                System.out.println("Aktualna data i godzina "+systemDataTime);
                 System.out.println("ID: " + LOG.getId() + "  " + LOG.getName());
                 System.out.println("wpisz i zatwierdz:");
                 System.out.println("1. wypisz dane urzytkownika");
                 System.out.println("2. dodaj pracownika do systemu");
                 System.out.println("3. wypisz wszystkich pracowników");
                 System.out.println("4. zbuduj budynek");
-                System.out.println("5. wypisz informacje o farmie farmie");
+                System.out.println("5. wypisz informacje o farmie");
                 System.out.println("6. wypisz budynki na farmie");
                 System.out.println("7. wyloguj i zakoncz program");
                 op = getInt();
 
-                switch (op) {
-                    case 1: {
-                        System.out.println(LOG.toString());
-                        System.out.println();
-                        System.out.println("powrot do manu glownego [t/n]");
-                        String ar = getString();
-                        while (!ar.equals("t")) {
+                String terminate=("");
+                while (!terminate.equals("t")) {
+
+                    switch (op) {
+                        case 1: {
                             System.out.println(LOG.toString());
+                            System.out.println();
                             System.out.println("powrot do manu glownego [t/n]");
-                            ar = getString();
+                            terminate = getString();
+                            break;
                         }
-                        break;
-                    }
 
-                    case 2: {
-                        System.out.println("[1] dodaj managera");
-                        System.out.println("[2] dodaj pracownika");
-                        int opr = getInt();
+                        case 2: {
+                            System.out.println("[1] dodaj managera");
+                            System.out.println("[2] dodaj pracownika");
+                            int opr = getInt();
 
-                        switch (opr) {
-                            case 2: {
-                                createEmployee();
-                                break;
-                            }
-                            case 1: {
-                                createManager();
-                                break;
-                            }
-                        }
-                    }
-
-                    case 3: {
-                        String empTab[] = new String[20];
-                        empTab = read("employees.txt");
-                        String end = "";
-                        while (!(end.equals("t")))
-                            for (int i = 0; i < empTab.length; i++) {
-                                if (empTab[i] != null) {
-                                    System.out.println(empTab[i]);
-                                } else {
-                                    System.out.println("czy powrocic do glownego manu[t/n]");
-                                    end = getString();
-                                    break;
-                                }
-                            }
-                        break;
-                    }
-                    case 4: {
-                        String end = "";
-                        int op1 = 0;
-                        while (!(end.equals("t"))) {
-                            System.out.println("1. Zbuduj studnie");
-                            System.out.println("2. Zbuduj spichlerz");
-                            System.out.println("3. Zasadz pole");
-                            System.out.println("4. Zbuduj garaz");
-                            System.out.println("5. Zbuduj kurnik");
-                            System.out.println("6. Zbuduj magazyn mleka");
-                            System.out.println("7. Zbuduj oborę");
-                            op1 = Load.getInt();
-                            switch (op1) {
-                                case 1: {
-                                    FreshWaterWell.build(FARM);
-                                    ReturnBack.ReturnBack(end);
-                                    break;
-                                }
+                            switch (opr) {
                                 case 2: {
-                                    Granary.build(FARM);
-                                    ReturnBack.ReturnBack(end);
+                                    createEmployee();
                                     break;
                                 }
-                                case 3: {
-                                    Field.build(FARM);
-                                    ReturnBack.ReturnBack(end);
+                                case 1: {
+                                    createManager();
                                     break;
                                 }
-                                case 4: {
-                                    Garage.build(FARM);
-                                    ReturnBack.ReturnBack(end);
-                                    break;
-                                }
-                                case 5:{
-                                    ChickenCoop.build(FARM);
-                                    ReturnBack.ReturnBack(end);
-                                    break;
-                                }
-                                case 6:{
-                                    MilkReceiver.build(FARM);
-                                    ReturnBack.ReturnBack(end);
-                                    break;
-                                }
-                                case 7:{
-                                    CowShed.build(FARM);
-                                    ReturnBack.ReturnBack(end);
-                                    break;
-                                }
-                                case 8: {
-                                    LOG = null;
-                                    System.out.println("wylogowano");
-                                    System.exit(0);           // status "0" bo wychodzimy bez bledow.
-
-                                }
-
                             }
                         }
+
+                        case 3: {
+                            String empTab[] = new String[10];
+                            empTab = read("employees.txt");
+                            String end = "";
+                                for (int i = 0; i < empTab.length; i++) {
+                                    if (empTab[i] != null) {
+                                        System.out.println(empTab[i]);
+                                    }
+                                    System.out.println("czy powrocic do glownego manu[t/n]");
+                                    terminate = getString();
+                                    break;
+                                }
+                                break;
+
+                        }
+                        case 4: {
+                            String end="";
+                            int op1 = 0;
+                            System.out.println("separacja");
+
+                            while (!end.equals("t")) {
+
+                                System.out.println("1. Zbuduj studnie");
+                                System.out.println("2. Zbuduj spichlerz");
+                                System.out.println("3. Zasadz pole");
+                                System.out.println("4. Zbuduj garaz");
+                                System.out.println("5. Zbuduj kurnik");
+                                System.out.println("6. Zbuduj magazyn mleka");
+                                System.out.println("7. Zbuduj oborę");
+                                System.out.println("8. Powróć do manu głównego");
+                                op1 = Load.getInt();
+
+                                switch (op1) {
+
+                                    case 1: {
+                                        FreshWaterWell.build(FARM, buldingsL);
+                                        System.out.println("czy powrocic do manu budowania[t/n]");
+                                        end = getString();
+                                        break;
+                                    }
+                                    case 2: {
+                                        Granary.build(FARM);
+                                        System.out.println("czy powrocic do manu budowania[t/n]");
+                                        end = getString();
+                                        break;
+                                    }
+                                    case 3: {
+                                        Field.build(FARM);
+                                        System.out.println("czy powrocic do manu budowania[t/n]");
+                                        end = getString();
+                                        break;
+                                    }
+                                    case 4: {
+                                        Garage.build(FARM);
+                                        System.out.println("czy powrocic do manu budowania[t/n]");
+                                        end = getString();
+                                        break;
+                                    }
+                                    case 5: {
+                                        ChickenCoop.build(FARM);
+                                        System.out.println("czy powrocic do manu budowania[t/n]");
+                                        end = getString();
+                                        break;
+                                    }
+                                    case 6: {
+                                        MilkReceiver.build(FARM);
+                                        System.out.println("czy powrocic do manu budowania[t/n]");
+                                        end = getString();
+                                        break;
+                                    }
+                                    case 7: {
+                                        CowShed.build(FARM);
+                                        System.out.println("czy powrocic do manu budowania[t/n]");
+                                        end = getString();
+                                        break;
+                                    }
+                                    case 8: {
+                                        end = "t";
+                                        break;
+                                    }
+                                    default:
+                                        System.out.println("niepoprawny wybór, wybierz ponownie");
+                                        op1=getInt();
+                                }
+                                break;
+                            }
+                        }
+                        case 5: {
+                            System.out.println(FARM);
+                            System.out.println("[t/n] aby wrocic do manu glownego");
+                            terminate = Load.getString();
+                            break;
+                        }
+                        case 6: {
+                            for (Object buldings : buldingsL) {
+                                System.out.println(buldings);
+                            }
+                            System.out.println("[t/n] aby wrocic do manu glownego");
+                            terminate = Load.getString();
+                            break;
+                        }
+                        case 7: {
+                            LOG = null;
+                            System.out.println("wylogowano");
+                            System.exit(0);           // status "0" bo wychodzimy bez bledow.
+                            break;
+                        }
+                        default:
+                            System.out.println("niepoprawny wybór");
                     }
                 }
             }
