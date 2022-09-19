@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Load {
 
@@ -143,9 +144,18 @@ public class Load {
         return farm;
     }
 
-
-
-
+    public static String getString(){
+        return new Scanner(System.in).next();
+    }
+    public static int getInt(){
+        return new Scanner(System.in).nextInt();
+    }
+    public static boolean getBoolean(){
+        return new Scanner(System.in).nextBoolean();
+    }
+    public static double getDouble(){
+        return new Scanner(System.in).nextDouble();
+    }
 
 
 }
