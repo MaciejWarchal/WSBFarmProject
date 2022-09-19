@@ -154,28 +154,7 @@ public class MainMenu extends FileSystem {
                             op1=getInt();
                             switch (op1){
                                 case 1:{
-                                    System.out.println("podaj numer budynku");
-                                    int number=getInt();
-                                    System.out.println("ustaw granice obiektu");
-                                    Border border=new Border();
-                                    border=Bulding.createBorder();
-                                    if (border.checkBorder(FARM.getFarmBorder())){
-                                        System.out.println("obiekt ustawiono poprawnie");
-                                        System.out.println("podaj koszt inwestycji");
-                                        double price=getDouble();
-                                        System.out.println("podaj ilosc wody wytwarzanej na dzien w [m3]");
-                                        double waterproduction=getDouble();
-                                        System.out.println("podaj pojemnosc studni w [m3]");
-                                        double waterCapacity=getDouble();
 
-                                        FreshWaterWell well=new FreshWaterWell(number,border,price,waterproduction,waterCapacity);
-                                        System.out.println("obiekt wybudowano");
-
-                                    } else {
-                                        System.out.println("obietk po za granicami farmy");
-                                        break;
-                                    }
-                                }
                             }
 
 
