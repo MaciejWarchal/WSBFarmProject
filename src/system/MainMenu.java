@@ -13,6 +13,7 @@ import users.UserSuperUser;
 
 import java.awt.geom.Point2D;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainMenu extends FileSystem {
@@ -82,9 +83,9 @@ public class MainMenu extends FileSystem {
         }
     }*/
 
-    public static void manuManager(User LOG,Farm FARM) throws IOException {
-        int op=999999999;
-        if (LOG!=null) {
+    public static void manuManager(User LOG, Farm FARM, ArrayList buldingsL, ArrayList machinesL) throws IOException {
+        int op = 999999999;
+        if (LOG != null) {
             while (op != 0) {
                 System.out.println("ID: " + LOG.getId() + "  " + LOG.getName());
                 System.out.println("wpisz i zatwierdz:");
@@ -94,8 +95,8 @@ public class MainMenu extends FileSystem {
                 System.out.println("4. zbuduj budynek");
                 System.out.println("5. wypisz informacje o farmie farmie");
                 System.out.println("6. wyloguj i zakoncz program");
-                op = getInt();
 
+                op = getInt();
                 switch (op) {
                     case 1: {
                         System.out.println(LOG.toString());
@@ -105,7 +106,7 @@ public class MainMenu extends FileSystem {
                         while (!ar.equals("t")) {
                             System.out.println(LOG.toString());
                             System.out.println("powrot do manu glownego [t/n]");
-                            ar=getString();
+                            ar = getString();
                         }
                         break;
                     }
@@ -113,14 +114,14 @@ public class MainMenu extends FileSystem {
                     case 2: {
                         System.out.println("[1] dodaj managera");
                         System.out.println("[2] dodaj pracownika");
-                        int opr=getInt();
+                        int opr = getInt();
 
                         switch (opr) {
                             case 2: {
                                 createEmployee();
                                 break;
                             }
-                            case 1:{
+                            case 1: {
                                 createManager();
                                 break;
                             }
@@ -129,137 +130,139 @@ public class MainMenu extends FileSystem {
                     }
 
                     case 3: {
-                        String empTab[]=new String[20];
-                        empTab=read("employees.txt");
-                        String end="";
+                        String empTab[] = new String[20];
+                        empTab = read("employees.txt");
+                        String end = "";
                         while (!(end.equals("t")))
-                        for (int i=0;i<empTab.length; i++){
-                            if (empTab[i]!=null){
-                                System.out.println(empTab[i]);
-                            } else {
-                                System.out.println("czy powrocic do glownego manu[t/n]");
-                                end=getString();
-                                break;
+                            for (int i = 0; i < empTab.length; i++) {
+                                if (empTab[i] != null) {
+                                    System.out.println(empTab[i]);
+                                } else {
+                                    System.out.println("czy powrocic do glownego manu[t/n]");
+                                    end = getString();
+                                    break;
+                                }
                             }
-                        }
                         break;
                     }
-                    case 4:{
-                        String end="";
-                        int op1=0;
+                    case 4: {
+                        String end = "";
+                        int op1 = 0;
                         while (!(end.equals("t"))) {
                             System.out.println("1. Zbuduj studnie");
                             System.out.println("2. Zbuduj spichlerz");
                             System.out.println("3. Zasadz pole");
-                            op1=getInt();
-                            switch (op1){
-                                case 1:{
+                            op1 = getInt();
+                            switch (op1) {
+                                case 1: {
 
+
+                                    System.out.println("czy powrocic do glownego manu[t/n]");
+                                    end = getString();
+                                }
+                                break;
                             }
-
-
-                            System.out.println("czy powrocic do glownego manu[t/n]");
-                            end = getString();
                         }
-                        break;
                     }
-                    case 5:{
-                        System.out.println(Load.loadfarm("farm.txt"));
-                        break;
-                    }
-                    case 6: {
-                        LOG = null;
-                        System.out.println("wylogowano");
-                        System.exit(0);           // status "0" bo wychodzimy bez bledow.
 
-                    }
+                        case 5: {
+                            System.out.println(Load.loadfarm("farm.txt"));
+                            break;
+                        }
+                        case 6: {
+                            LOG = null;
+                            System.out.println("wylogowano");
+                            System.exit(0);           // status "0" bo wychodzimy bez bledow.
+
+                        }
+
                 }
             }
         }
     }
 
 
+        public static Employee createEmployee() throws IOException {
 
-    public static Employee createEmployee() throws IOException {
-
-        System.out.println("podaj id");
-        String id = getString();
-        if (!FileSystem.checkIdIfExistUsers(id)) {
-            System.out.println("podaj imie i nazwisko");
-            String name = getString();
-            System.out.println("numer telfonu:");
-            int ph = getInt();
-            System.out.println("wiek pracownika:");
-            int ag = getInt();
-            System.out.println("haslo");
-            String pass = getString();
-            System.out.println("miesieczne wynagrodzenie");
-            double sal = getDouble();
-
-
-            Employee employee = new Employee(Integer.parseInt(id), name, ph, ag, sal,
-                    sal, 0, 0, 0, 0,
-                    0, 0, null, 0);
-            FileSystem.SaveToFile(employee.toString(),"employees.txt");
-
-            UserEmployee Employee= new UserEmployee(Integer.parseInt(id),name,false,false,
-                    true,pass);
-            FileSystem.SaveToFile(Employee.toString(),"users.txt");
+            System.out.println("podaj id");
+            String id = getString();
+            if (!FileSystem.checkIdIfExistUsers(id)) {
+                System.out.println("podaj imie i nazwisko");
+                String name = getString();
+                System.out.println("numer telfonu:");
+                int ph = getInt();
+                System.out.println("wiek pracownika:");
+                int ag = getInt();
+                System.out.println("haslo");
+                String pass = getString();
+                System.out.println("miesieczne wynagrodzenie");
+                double sal = getDouble();
 
 
-            return employee;
-        } else {
-            System.out.println("podane id juz istnieje");
-            return null;
+                Employee employee = new Employee(Integer.parseInt(id), name, ph, ag, sal,
+                        sal, 0, 0, 0, 0,
+                        0, 0, null, 0);
+                FileSystem.SaveToFile(employee.toString(), "employees.txt");
+
+                UserEmployee Employee = new UserEmployee(Integer.parseInt(id), name, false, false,
+                        true, pass);
+                FileSystem.SaveToFile(Employee.toString(), "users.txt");
+                return employee;
+            } else {
+                System.out.println("podane id juz istnieje");
+                return null;
+            }
+
         }
-    }
 
 
-    public static Manager createManager() throws IOException {
+        public static Manager createManager () throws IOException {
 
-        System.out.println("podaj id");
-        String id = getString();
-        if (!FileSystem.checkIdIfExistUsers(id)) {
-            System.out.println("podaj imie i nazwisko");
-            String name = getString();
-            System.out.println("numer telfonu:");
-            int ph = getInt();
-            System.out.println("wiek pracownika:");
-            int ag = getInt();
-            System.out.println("haslo");
-            String pass = getString();
-            System.out.println("miesieczne wynagrodzenie");
-            double sal = getDouble();
+            System.out.println("podaj id");
+            String id = getString();
+            if (!FileSystem.checkIdIfExistUsers(id)) {
+                System.out.println("podaj imie i nazwisko");
+                String name = getString();
+                System.out.println("numer telfonu:");
+                int ph = getInt();
+                System.out.println("wiek pracownika:");
+                int ag = getInt();
+                System.out.println("haslo");
+                String pass = getString();
+                System.out.println("miesieczne wynagrodzenie");
+                double sal = getDouble();
 
 
-            Manager manager = new Manager(Integer.parseInt(id),name, ph, ag,sal,sal,0,
-                    0, 0, 0, 0, 0, null,
-                    0, null);
-            FileSystem.SaveToFile(manager.toString(),"employees.txt");
-            System.out.println(manager.toString());
+                Manager manager = new Manager(Integer.parseInt(id), name, ph, ag, sal, sal, 0,
+                        0, 0, 0, 0, 0, null,
+                        0, null);
+                FileSystem.SaveToFile(manager.toString(), "employees.txt");
+                System.out.println(manager.toString());
 
-            UserManager Manager=new UserManager(Integer.parseInt(id),name,false, true, false, pass);
-            FileSystem.SaveToFile(Manager.toString(),"users.txt");
-            return manager;
-        } else {
-            System.out.println("podane id juz istnieje");
-            return null;
+                UserManager Manager = new UserManager(Integer.parseInt(id), name, false, true, false, pass);
+                FileSystem.SaveToFile(Manager.toString(), "users.txt");
+                return manager;
+            } else {
+                System.out.println("podane id juz istnieje");
+                return null;
+            }
         }
-    }
 
 
 
-
-    public static String getString(){
+    public static String getString() {
         return new Scanner(System.in).next();
     }
-    public static int getInt(){
+
+    public static int getInt() {
         return new Scanner(System.in).nextInt();
     }
-    public static boolean getBoolean(){
+
+    public static boolean getBoolean() {
         return new Scanner(System.in).nextBoolean();
     }
-    public static double getDouble(){
+
+    public static double getDouble() {
         return new Scanner(System.in).nextDouble();
     }
 

@@ -1,10 +1,6 @@
 import area.*;
 import humans.Employee;
-import system.FileSystem;
-import system.Load;
-import system.Log;
-import system.MainMenu;
-import system.TextSearching;
+import system.*;
 
 import users.*;
 
@@ -68,10 +64,15 @@ public class Main {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             } else {
 
+                ArrayList buldingsL=new ArrayList<>(10);
+                ArrayList machinesL=new ArrayList<>(10);
+
                 User LOG=Log.logIn();
                 Farm farm1=Load.loadfarm("farm.txt");
                 farm1.setEmployees(Load.loadEmployeesToFarm("employees.txt"));
-                MainMenu.manuManager(LOG,farm1);
+                buldingsL=Deserialize.deserializationList("buldings.bin");
+                machinesL=Deserialize.deserializationList("machines.bin");
+                MainMenu.manuManager(LOG,farm1,buldingsL,machinesL);
 
             }
         }
