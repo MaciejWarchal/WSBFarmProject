@@ -1,9 +1,10 @@
 package area;
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.Scanner;
 
-public abstract class Bulding implements centerable,checkBorder{
+public abstract class Bulding implements centerable,checkBorder, Serializable {
 
     protected int number;
     protected Border border;
@@ -23,6 +24,9 @@ public abstract class Bulding implements centerable,checkBorder{
         this.border = border;
         this.center = center;
         this.price = price;
+    }
+
+    public Bulding() {
     }
 
     public boolean checkBorder(Border farmBorder, Border thisBorder){
@@ -118,6 +122,30 @@ public abstract class Bulding implements centerable,checkBorder{
         Point2D rd = new Point2D.Double(x4,y4);
         Border farm=new Border(lu,ru,ld,rd);
         return farm;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public void setBorder(Border border) {
+        this.border = border;
+    }
+
+    public Point2D getCenter() {
+        return center;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package system;
+package mainManu;
 
 import area.Border;
 import area.Bulding;
@@ -6,6 +6,8 @@ import area.Farm;
 import area.FreshWaterWell;
 import humans.Employee;
 import humans.Manager;
+import system.FileSystem;
+import system.Load;
 import users.User;
 import users.UserEmployee;
 import users.UserManager;
@@ -92,22 +94,18 @@ public class MainMenu extends FileSystem {
                 System.out.println("1. wypisz dane urzytkownika");
                 System.out.println("2. dodaj pracownika do systemu");
                 System.out.println("3. wypisz wszystkich pracowników");
-                System.out.println("4. zbuduj budynek");
+                System.out.println("4. zbuduj budynek lub zasadz pole");
                 System.out.println("5. wypisz informacje o farmie farmie");
                 System.out.println("6. wyloguj i zakoncz program");
 
                 op = getInt();
+                //  caly switch w petli
+                String termination="n";
+                while (!termination.equals("t"))
                 switch (op) {
                     case 1: {
-                        System.out.println(LOG.toString());
-                        System.out.println();
-                        System.out.println("powrot do manu glownego [t/n]");
-                        String ar = getString();
-                        while (!ar.equals("t")) {
-                            System.out.println(LOG.toString());
-                            System.out.println("powrot do manu glownego [t/n]");
-                            ar = getString();
-                        }
+                        UserInfo.userInfo(LOG);
+                        termination=ReturnBack.returnToMainManu(termination);
                         break;
                     }
 
@@ -119,10 +117,12 @@ public class MainMenu extends FileSystem {
                         switch (opr) {
                             case 2: {
                                 createEmployee();
+                                termination=ReturnBack.returnToMainManu(termination);
                                 break;
                             }
                             case 1: {
                                 createManager();
+                                termination=ReturnBack.returnToMainManu(termination);
                                 break;
                             }
                         }
@@ -130,19 +130,8 @@ public class MainMenu extends FileSystem {
                     }
 
                     case 3: {
-                        String empTab[] = new String[20];
-                        empTab = read("employees.txt");
-                        String end = "";
-                        while (!(end.equals("t")))
-                            for (int i = 0; i < empTab.length; i++) {
-                                if (empTab[i] != null) {
-                                    System.out.println(empTab[i]);
-                                } else {
-                                    System.out.println("czy powrocic do glownego manu[t/n]");
-                                    end = getString();
-                                    break;
-                                }
-                            }
+                        ShowAllEmployees.showAllEmployees();
+                        ReturnBack.returnToMainManu(termination);
                         break;
                     }
                     case 4: {
@@ -157,12 +146,14 @@ public class MainMenu extends FileSystem {
                                 case 1: {
 
 
+
                                     System.out.println("czy powrocic do glownego manu[t/n]");
                                     end = getString();
                                 }
                                 break;
                             }
                         }
+                        break;
                     }
 
                         case 5: {
