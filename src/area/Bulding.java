@@ -24,6 +24,7 @@ public abstract class Bulding implements centerable,checkBorder, Serializable {
         this.border = border;
         this.center = center;
         this.price = price;
+
     }
 
     public Bulding() {

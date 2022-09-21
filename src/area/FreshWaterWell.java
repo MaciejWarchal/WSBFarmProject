@@ -13,6 +13,9 @@ public class FreshWaterWell extends Bulding implements centerable,checkBorder, S
     private double waterproduction;
     private double waterCapacity;
 
+
+
+
     public FreshWaterWell(int number, Border border, double price, double waterproduction, double waterCapacity) {
         super(number, border, centerable.findCenter(border), price);
         this.waterproduction = waterproduction;
@@ -24,7 +27,7 @@ public class FreshWaterWell extends Bulding implements centerable,checkBorder, S
         FreshWaterWell well=null;
         System.out.println("podaj numer budynku");
         int number = Load.getInt();
-        if (CheckNumbers.checkBuldingNumber(buldingsL, number)) {
+        if (!CheckNumbers.checkBuldingNumber(buldingsL, number)) {
             System.out.println("ustaw granice obiektu");
             Border border = new Border();
             border = Bulding.createBorder();

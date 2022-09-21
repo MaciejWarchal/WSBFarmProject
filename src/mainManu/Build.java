@@ -1,8 +1,6 @@
 package mainManu;
 
-import area.Bulding;
-import area.Farm;
-import area.FreshWaterWell;
+import area.*;
 
 import java.util.ArrayList;
 
@@ -22,6 +20,7 @@ public class Build {
             System.out.println("5. Zbuduj obore");
             System.out.println("6. Zbuduj zbiornik na mleko");
             System.out.println("7. Zbuduj garaz");
+            System.out.println("powrot do mainmanu");
             op1 = getInt();
             switch (op1) {
 
@@ -29,6 +28,32 @@ public class Build {
                     FreshWaterWell.buildFreshWatrWelll(farm, buldingsL);
                     System.out.println("czy powrocic do glownego manu[t/n]");
                     end = getString();
+                    break;
+                }
+                case 2: {
+                    Granary.buildGranary(farm,buldingsL);
+                    System.out.println("czy powrocic do glownego manu[t/n]");
+                    end = getString();
+                    break;
+                }
+                case 3: {
+                    Field.buildField(farm,buldingsL);
+                    System.out.println("czy powrocic do glownego manu[t/n]");
+                    end = getString();
+                    break;
+                }
+                case 4: {
+
+                    break;
+                }
+                case 5: {
+                    break;
+                }
+                case 6: {
+
+                    break;
+                }
+                case 7: {
                     break;
                 }
             }

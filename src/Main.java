@@ -69,7 +69,7 @@ public class Main {
                 User LOG=Log.logIn();
                 Farm farm1=Load.loadfarm("farm.txt");
                 farm1.setEmployees(Load.loadEmployeesToFarm("employees.txt"));
-                //buldingsL=Deserialize.deserializationList("buldings.bin");
+                buldingsL=Deserialize.deserializationList("buldings.bin");
                 //machinesL=Deserialize.deserializationList("machines.bin");
                 MainMenu.manuManager(LOG,farm1,buldingsL,machinesL);
 

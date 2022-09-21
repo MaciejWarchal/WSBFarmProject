@@ -135,24 +135,8 @@ public class MainMenu extends FileSystem {
                         break;
                     }
                     case 4: {
-                        String end = "";
-                        int op1 = 0;
-                        while (!(end.equals("t"))) {
-                            System.out.println("1. Zbuduj studnie");
-                            System.out.println("2. Zbuduj spichlerz");
-                            System.out.println("3. Zasadz pole");
-                            op1 = getInt();
-                            switch (op1) {
-                                case 1: {
-
-
-
-                                    System.out.println("czy powrocic do glownego manu[t/n]");
-                                    end = getString();
-                                }
-                                break;
-                            }
-                        }
+                        Build.buildConstruction(buldingsL,FARM);
+                        ReturnBack.returnToMainManu(termination);
                         break;
                     }
 
