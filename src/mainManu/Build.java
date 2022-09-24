@@ -9,7 +9,7 @@ import static system.Load.getString;
 
 public class Build {
 
-    public static void buildConstruction(ArrayList<Bulding> buldingsL, Farm farm) {
+    public static String buildConstruction(ArrayList<Bulding> buldingsL, Farm farm) {
         String end = "";
         int op1 = 0;
         while (!(end.equals("t"))) {
@@ -62,5 +62,6 @@ public class Build {
                 }
             }
         }
+        return end;
     }
 }

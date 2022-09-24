@@ -101,7 +101,7 @@ public class MainMenu extends FileSystem {
                 switch (op) {
                     case 1: {
                         UserInfo.userInfo(LOG);
-                        termination=ReturnBack.returnToMainManu(termination);
+                        termination=ReturnBack.returnToMainManu();
                         break;
                     }
 
@@ -113,12 +113,12 @@ public class MainMenu extends FileSystem {
                         switch (opr) {
                             case 2: {
                                 createEmployee();
-                                termination=ReturnBack.returnToMainManu(termination);
+                                termination=ReturnBack.returnToMainManu();
                                 break;
                             }
                             case 1: {
                                 createManager();
-                                termination=ReturnBack.returnToMainManu(termination);
+                                termination=ReturnBack.returnToMainManu();
                                 break;
                             }
                         }
@@ -127,13 +127,12 @@ public class MainMenu extends FileSystem {
 
                     case 3: {
                         ShowAllEmployees.showAllEmployees();
-                        ReturnBack.returnToMainManu(termination);
+                        termination=ReturnBack.returnToMainManu();
                         break;
                     }
                     case 4: {
-                        Build.buildConstruction(buldingsL,FARM);
-                        System.out.println("manu wyboru");
-                        ReturnBack.returnToMainManu(termination);
+                        termination=Build.buildConstruction(buldingsL,FARM);
+
                         break;
                     }
 
@@ -145,12 +144,12 @@ public class MainMenu extends FileSystem {
                         for (Object x:machinesL) {
                         System.out.println(x);
                         }
-                        ReturnBack.returnToMainManu(termination);
+                        termination=ReturnBack.returnToMainManu();
                         break;
                     }
                     case 7: {
-                        BuyMachine.buyMachine(machinesL,FARM);
-                        ReturnBack.returnToMainManu(termination);
+                        termination=BuyMachine.buyMachine(machinesL,FARM);
+
                         break;
                     }
 

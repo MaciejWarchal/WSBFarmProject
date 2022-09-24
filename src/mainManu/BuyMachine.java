@@ -15,7 +15,7 @@ import static system.Load.getString;
 
 public class BuyMachine {
 
-    public static void buyMachine(ArrayList<Machine> machinesL, Farm farm) {
+    public static String buyMachine(ArrayList<Machine> machinesL, Farm farm) {
         String end = "";
         int op1 = 0;
         while (!(end.equals("t"))) {
@@ -56,5 +56,6 @@ public class BuyMachine {
 
             }
         }
+        return end;
     }
 }
