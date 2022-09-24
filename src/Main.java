@@ -72,7 +72,6 @@ public class Main {
                 buldingsL=Deserialize.deserializationList("buldings.bin");
                 //machinesL=Deserialize.deserializationList("machines.bin");
                 MainMenu.manuManager(LOG,farm1,buldingsL,machinesL);
-
             }
         }
         catch(IllegalArgumentException e){

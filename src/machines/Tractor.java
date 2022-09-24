@@ -5,12 +5,13 @@ import system.CheckNumbers;
 import system.Load;
 import system.Serialize;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Tractor extends Machine{
+public class Tractor extends Machine implements Serializable {
 
-    public Tractor(Boolean isReadyToUse, double fuelconsumption_l_Per_h, double performance_m2_Per_h, double fuelPrice) {
-        super(isReadyToUse, fuelconsumption_l_Per_h, performance_m2_Per_h, fuelPrice);
+    public Tractor(int number, Boolean isReadyToUse, double fuelconsumption_l_Per_h, double performance_m2_Per_h, double fuelPrice) {
+        super(number, isReadyToUse, fuelconsumption_l_Per_h, performance_m2_Per_h, fuelPrice);
     }
 
     public static Tractor buyTractor(Farm farm, ArrayList<Machine> machinesL){
@@ -37,12 +38,27 @@ public class Tractor extends Machine{
             System.out.println("podaj cene paliwa");
             double fuelPrice = Load.getDouble();
 
-            tractor = new Tractor(isReadyToUse, fuelConsumption, performance, fuelPrice);
+            tractor = new Tractor(number,isReadyToUse, fuelConsumption, performance, fuelPrice);
             machinesL.add(tractor);
             Serialize.serializationList(machinesL, "machines.bin");
+        }else {
+            System.out.println("numer maszyny zajety");
+            tractor=null;
         }
         return tractor;
 
 
+
+    }
+
+    @Override
+    public String toString() {
+        return "Tractor{" +
+                "number=" + number +
+                ", isReadyToUse=" + isReadyToUse +
+                ", fuelconsumption_l_Per_h=" + fuelconsumption_l_Per_h +
+                ", performance_m2_Per_h=" + performance_m2_Per_h +
+                ", fuelPrice=" + fuelPrice +
+                '}';
     }
 }

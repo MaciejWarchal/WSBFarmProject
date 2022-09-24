@@ -1,9 +1,6 @@
 package mainManu;
 
-import area.Border;
-import area.Bulding;
 import area.Farm;
-import area.FreshWaterWell;
 import humans.Employee;
 import humans.Manager;
 import system.FileSystem;
@@ -11,9 +8,7 @@ import system.Load;
 import users.User;
 import users.UserEmployee;
 import users.UserManager;
-import users.UserSuperUser;
 
-import java.awt.geom.Point2D;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -96,7 +91,8 @@ public class MainMenu extends FileSystem {
                 System.out.println("3. wypisz wszystkich pracowników");
                 System.out.println("4. zbuduj budynek lub zasadz pole");
                 System.out.println("5. wypisz informacje o farmie farmie");
-                System.out.println("6. wyloguj i zakoncz program");
+                System.out.println("6. wypisz maszyny na farmie");
+                System.out.println("7. kup maszyne");
 
                 op = getInt();
                 //  caly switch w petli
@@ -136,25 +132,39 @@ public class MainMenu extends FileSystem {
                     }
                     case 4: {
                         Build.buildConstruction(buldingsL,FARM);
+                        System.out.println("manu wyboru");
                         ReturnBack.returnToMainManu(termination);
                         break;
                     }
 
-                        case 5: {
-                            System.out.println(Load.loadfarm("farm.txt"));
-                            break;
+                    case 5: {
+                        System.out.println(Load.loadfarm("farm.txt"));
+                        break;
+                    }
+                    case 6: {
+                        for (Object x:machinesL) {
+                        System.out.println(x);
                         }
-                        case 6: {
-                            LOG = null;
-                            System.out.println("wylogowano");
-                            System.exit(0);           // status "0" bo wychodzimy bez bledow.
+                        ReturnBack.returnToMainManu(termination);
+                        break;
+                    }
+                    case 7: {
+                        BuyMachine.buyMachine(machinesL,FARM);
+                        ReturnBack.returnToMainManu(termination);
+                        break;
+                    }
 
-                        }
+                    case 8: {
+                        LOG = null;
+                        System.out.println("wylogowano");
+                        System.exit(0);           // status "0" bo wychodzimy bez bledow.
+                    }
+                    }
 
                 }
             }
         }
-    }
+
 
 
         public static Employee createEmployee() throws IOException {

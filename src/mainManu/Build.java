@@ -20,7 +20,7 @@ public class Build {
             System.out.println("5. Zbuduj obore");
             System.out.println("6. Zbuduj zbiornik na mleko");
             System.out.println("7. Zbuduj garaz");
-            System.out.println("powrot do mainmanu");
+            System.out.println("8. Powrot do mainmanu");
             op1 = getInt();
             switch (op1) {
 
@@ -56,8 +56,11 @@ public class Build {
                 case 7: {
                     break;
                 }
+                case 8:{
+                    System.out.println("[t/n]");
+                    end=getString();
+                }
             }
         }
-
     }
 }
