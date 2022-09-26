@@ -1,5 +1,6 @@
 package area;
 
+import machines.Machine;
 import system.CheckNumbers;
 import system.Load;
 import system.Serialize;
@@ -7,6 +8,7 @@ import system.Serialize;
 import java.awt.geom.Point2D;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class Field extends Bulding implements Serializable {
@@ -59,4 +61,53 @@ public class Field extends Bulding implements Serializable {
         return field;
     }
 
+    public void grow(){
+
+        int days= (int) ChronoUnit.DAYS.between(this.dateOfLastUpdate,LocalDate.now());
+        double mass=this.performance_kgm2day*this.area_m2*days;
+        this.massOfGrain_kg=mass;
+        this.dateOfLastUpdate=LocalDate.now();
+
+    }
+
+    public void harvest(ArrayList<Machine> machinesL,Farm farm,ArrayList<Bulding> buldingsL){
+        this.grow();
+
+        if ()
+    }
+
+
+
+
+    public double getArea_m2() {
+        return area_m2;
+    }
+
+    public void setArea_m2(double area_m2) {
+        this.area_m2 = area_m2;
+    }
+
+    public double getPerformance_kgm2day() {
+        return performance_kgm2day;
+    }
+
+    public void setPerformance_kgm2day(double performance_kgm2day) {
+        this.performance_kgm2day = performance_kgm2day;
+    }
+
+    public double getMassOfGrain_kg() {
+        return massOfGrain_kg;
+    }
+
+    public void setMassOfGrain_kg(double massOfGrain_kg) {
+        this.massOfGrain_kg = massOfGrain_kg;
+    }
+
+    public LocalDate getDateOfLastUpdate() {
+        return dateOfLastUpdate;
+    }
+
+    public void setDateOfLastUpdate(LocalDate dateOfLastUpdate) {
+        this.dateOfLastUpdate = dateOfLastUpdate;
+    }
 }

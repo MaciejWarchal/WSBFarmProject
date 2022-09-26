@@ -3,6 +3,7 @@ package mainManu;
 import area.Farm;
 import humans.Employee;
 import humans.Manager;
+import management.FieldsManagement;
 import system.FileSystem;
 import system.Load;
 import users.User;
@@ -93,6 +94,7 @@ public class MainMenu extends FileSystem {
                 System.out.println("5. wypisz informacje o farmie farmie");
                 System.out.println("6. wypisz maszyny na farmie");
                 System.out.println("7. kup maszyne");
+                System.out.println("8. zarządzanie polami");
 
                 op = getInt();
                 //  caly switch w petli
@@ -154,9 +156,17 @@ public class MainMenu extends FileSystem {
                     }
 
                     case 8: {
+                        FieldsManuMamagment.fieldsManagementManu(buldingsL,FARM,machinesL);
+                        break;
+                    }
+                    case 9:{
+                        break;
+                    }
+                    case 10:{
                         LOG = null;
                         System.out.println("wylogowano");
                         System.exit(0);           // status "0" bo wychodzimy bez bledow.
+
                     }
                     }
 

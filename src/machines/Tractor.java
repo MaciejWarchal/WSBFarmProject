@@ -1,6 +1,7 @@
 package machines;
 
 import area.Farm;
+import area.Field;
 import system.CheckNumbers;
 import system.Load;
 import system.Serialize;
@@ -9,6 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Tractor extends Machine implements Serializable {
+
+    public Tractor() {
+    }
 
     public Tractor(int number, Boolean isReadyToUse, double fuelconsumption_l_Per_h, double performance_m2_Per_h, double fuelPrice) {
         super(number, isReadyToUse, fuelconsumption_l_Per_h, performance_m2_Per_h, fuelPrice);
@@ -46,10 +50,16 @@ public class Tractor extends Machine implements Serializable {
             tractor=null;
         }
         return tractor;
+    }
 
+    public void useTractor(ArrayList<Machine> machinesL, Farm farm, Field field){
+        if (this.isReadyToUse){
 
+        }
 
     }
+
+
 
     @Override
     public String toString() {

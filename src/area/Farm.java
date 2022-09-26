@@ -81,6 +81,61 @@ public class Farm {
         return farm;
     }
 
+    public String getFarmName() {
+        return farmName;
+    }
+
+    public void setFarmName(String farmName) {
+        this.farmName = farmName;
+    }
+
+    public String getFarmAddres() {
+        return farmAddres;
+    }
+
+    public void setFarmAddres(String farmAddres) {
+        this.farmAddres = farmAddres;
+    }
+
+    public void setFarmBorder(Border farmBorder) {
+        FarmBorder = farmBorder;
+    }
+
+    public Double getCash() {
+        return cash;
+    }
+
+    public void setCash(Double cash) {
+        this.cash = cash;
+    }
+
+    public ArrayList<Employee> getEmployees() {
+        return employees;
+    }
+
+    public ArrayList<Bulding> getBuildings() {
+        return buildings;
+    }
+
+    public void setBuildings(ArrayList<Bulding> buildings) {
+        this.buildings = buildings;
+    }
+
+    public List<Machine> getMachines() {
+        return machines;
+    }
+
+    public void setMachines(List<Machine> machines) {
+        this.machines = machines;
+    }
+
+    public List<Animal> getAnimals() {
+        return animals;
+    }
+
+    public void setAnimals(List<Animal> animals) {
+        this.animals = animals;
+    }
 
     @Override
     public String toString() {

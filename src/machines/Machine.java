@@ -1,5 +1,8 @@
 package machines;
 
+import area.Farm;
+import area.Field;
+
 import java.io.Serializable;
 
 public abstract class Machine implements Serializable {
@@ -10,6 +13,9 @@ public abstract class Machine implements Serializable {
     protected double performance_m2_Per_h;
     protected double fuelPrice;
 
+    public Machine() {
+    }
+
     public Machine(int number, Boolean isReadyToUse, double fuelconsumption_l_Per_h, double performance_m2_Per_h, double fuelPrice) {
         this.number = number;
         this.isReadyToUse = isReadyToUse;
@@ -17,6 +23,17 @@ public abstract class Machine implements Serializable {
         this.performance_m2_Per_h = performance_m2_Per_h;
         this.fuelPrice = fuelPrice;
     }
+
+    public void useThisMachine(Farm farm, Field field){
+
+        if (this.isReadyToUse){
+        double fuelExpenses=(field.getArea_m2()/this.getPerformance_m2_Per_h())*this.getFuelconsumption_l_Per_h()*this.getFuelPrice();
+        farm.setCash(farm.getCash()-fuelExpenses);
+    }else {
+            System.out.println("maszyna nie działa");}
+    }
+
+
 
     public int getNumber() {
         return number;
