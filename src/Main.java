@@ -69,8 +69,17 @@ public class Main {
                 User LOG=Log.logIn();
                 Farm farm1=Load.loadfarm("farm.txt");
                 farm1.setEmployees(Load.loadEmployeesToFarm("employees.txt"));
-                buldingsL=Deserialize.deserializationList("buldings.bin");
-                machinesL=Deserialize.deserializationList("machines.bin");
+                try {
+                    buldingsL=Deserialize.deserializationList("buldings.bin");
+                }catch (Exception e){
+                    System.out.println("nie wczytano listy budynków i pul");
+                }
+                try {
+                    machinesL = Deserialize.deserializationList("machines.bin");
+                }catch (Exception e){
+                    System.out.println("nie wczytano listy maszyn4");
+                }
+
                 MainMenu.manuManager(LOG,farm1,buldingsL,machinesL);
             }
         }

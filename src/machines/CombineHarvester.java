@@ -43,8 +43,48 @@ public class CombineHarvester extends Machine implements Serializable {
             Serialize.serializationList(machinesL, "machines.bin");
         }
         return combineHarvester;
+    }
 
+    public static int combineHarvesterFindI (ArrayList<Machine> machinesL){
 
+        int combineHarvesterFoundInIndex=9999999;
+        CombineHarvester combineHarvester=null;
+
+        if (!machinesL.isEmpty()){
+            for (int i=0;i<machinesL.size();i++) {
+                if (machinesL.get(i)instanceof Tractor) {
+                    combineHarvester = (CombineHarvester) machinesL.get(i);
+                    combineHarvesterFoundInIndex=i;
+                } else
+                    System.out.println("nie znaleziono maszyny");
+            }
+        }else {
+            System.out.println("nie wczytano listy maszyn");
+            combineHarvester=null;
+            combineHarvesterFoundInIndex=9999999;
+        }
+
+        return combineHarvesterFoundInIndex;
+    }
+
+    public static CombineHarvester combineHarvesterFind (ArrayList<Machine> machinesL){
+
+        int tractorFoundInIndex=9999999;
+        CombineHarvester combineHarvester=null;
+
+        if (!machinesL.isEmpty()){
+            for (int i=0;i<machinesL.size();i++) {
+                if (machinesL.get(i)instanceof Tractor) {
+                    combineHarvester = (CombineHarvester) machinesL.get(i);
+                } else
+                    System.out.println("nie znaleziono maszyny");
+            }
+        }else {
+            System.out.println("nie wczytano listy maszyn");
+            combineHarvester=null;
+        }
+
+        return combineHarvester;
     }
 
     @Override

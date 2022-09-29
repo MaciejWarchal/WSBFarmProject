@@ -1,6 +1,9 @@
 package area;
 
+import machines.CombineHarvester;
+import machines.FindMachine;
 import machines.Machine;
+import machines.Tractor;
 import system.CheckNumbers;
 import system.Load;
 import system.Serialize;
@@ -71,9 +74,37 @@ public class Field extends Bulding implements Serializable {
     }
 
     public void harvest(ArrayList<Machine> machinesL,Farm farm,ArrayList<Bulding> buldingsL){
+
         this.grow();
 
-        if ()
+        Tractor tractor=null;
+        CombineHarvester combineHarvester=null;
+        tractor= Tractor.tractorFind(machinesL);
+        combineHarvester= CombineHarvester.combineHarvesterFind(machinesL);
+
+        Granary granary=null;
+        granary= Granary.findGranary(buldingsL,granary);
+
+        if (Tractor.tractorFindI(machinesL)!=99999999){
+            if (Granary.findGranary(buldingsL,granary)!=null){
+                granary.setGrainLevel_kg(granary.grainLevel_kg+this.massOfGrain_kg);
+                this.massOfGrain_kg=0;
+                tractor.useTractor(machinesL,farm,this);
+                combineHarvester.useThisMachine(farm,this);
+                int index=Granary.findGranarI(buldingsL,granary); //ta metoda usuwa spichlerz z listy buldingsL
+                buldingsL.add(index,granary);
+                Serialize.serializationList(buldingsL,"buldings.bin");
+
+
+            }else {
+                System.out.println("nie ma spichlerza na farmie");
+            }
+
+
+
+        }else {
+            System.out.println("nie ma maszyn do zbiorów");
+        }
     }
 
 
@@ -109,5 +140,19 @@ public class Field extends Bulding implements Serializable {
 
     public void setDateOfLastUpdate(LocalDate dateOfLastUpdate) {
         this.dateOfLastUpdate = dateOfLastUpdate;
+    }
+
+    @Override
+    public String toString() {
+        return "Field{" +
+                "area_m2=" + area_m2 +
+                ", performance_kgm2day=" + performance_kgm2day +
+                ", massOfGrain_kg=" + massOfGrain_kg +
+                ", dateOfLastUpdate=" + dateOfLastUpdate +
+                ", number=" + number +
+                ", border=" + border +
+                ", center=" + center +
+                ", price=" + price +
+                '}';
     }
 }

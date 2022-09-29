@@ -1,9 +1,13 @@
 package mainManu;
 
+import area.Bulding;
+import area.BuldingsInfo;
 import area.Farm;
 import humans.Employee;
 import humans.Manager;
+import machines.Machine;
 import management.FieldsManagement;
+import system.Deserialize;
 import system.FileSystem;
 import system.Load;
 import users.User;
@@ -85,16 +89,29 @@ public class MainMenu extends FileSystem {
         int op = 999999999;
         if (LOG != null) {
             while (op != 0) {
+
+                try {
+                    buldingsL= Deserialize.deserializationList("buldings.bin");
+                }catch (Exception e){
+                    System.out.println("nie wczytano listy budynków i pol");
+                }
+                try {
+                    machinesL = Deserialize.deserializationList("machines.bin");
+                }catch (Exception e){
+                    System.out.println("nie wczytano listy maszyn4");
+                }
+
                 System.out.println("ID: " + LOG.getId() + "  " + LOG.getName());
                 System.out.println("wpisz i zatwierdz:");
                 System.out.println("1. wypisz dane urzytkownika");
                 System.out.println("2. dodaj pracownika do systemu");
                 System.out.println("3. wypisz wszystkich pracowników");
                 System.out.println("4. zbuduj budynek lub zasadz pole");
-                System.out.println("5. wypisz informacje o farmie farmie");
+                System.out.println("5. wypisz informacje o farmie");
                 System.out.println("6. wypisz maszyny na farmie");
                 System.out.println("7. kup maszyne");
                 System.out.println("8. zarządzanie polami");
+                System.out.println("9. informacja o budynkach na farmie");
 
                 op = getInt();
                 //  caly switch w petli
@@ -140,6 +157,7 @@ public class MainMenu extends FileSystem {
 
                     case 5: {
                         System.out.println(Load.loadfarm("farm.txt"));
+                        termination=ReturnBack.returnToMainManu();
                         break;
                     }
                     case 6: {
@@ -156,10 +174,14 @@ public class MainMenu extends FileSystem {
                     }
 
                     case 8: {
-                        FieldsManuMamagment.fieldsManagementManu(buldingsL,FARM,machinesL);
+                        termination=FieldsManuMamagment.fieldsManagementManu(buldingsL,FARM,machinesL);
+
                         break;
                     }
                     case 9:{
+                        BuldingsInfo.showBuldingsList(buldingsL);
+                        System.out.println("powrot to mainmanu[t/n]");
+                        termination=Load.getString();
                         break;
                     }
                     case 10:{
@@ -172,7 +194,7 @@ public class MainMenu extends FileSystem {
 
                 }
             }
-        }
+    }
 
 
 
@@ -241,6 +263,7 @@ public class MainMenu extends FileSystem {
                 return null;
             }
         }
+
 
 
 

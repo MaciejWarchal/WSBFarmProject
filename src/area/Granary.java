@@ -53,7 +53,7 @@ public class Granary extends Bulding{
 
                 granary = new Granary(number, border, centerable.findCenter(border), price, grainCapacity, grainLevel);
                 buldingsL.add(granary);
-                Serialize.serializationList(buldingsL, "buldings1.bin");
+                Serialize.serializationList(buldingsL, "buldings.bin");
 
                 System.out.println("obiekt wybudowano");
 
@@ -61,6 +61,50 @@ public class Granary extends Bulding{
                 System.out.println("obietk po za granicami farmy");
             }
         }
+
+    public static Granary findGranary (ArrayList<Bulding> buldingsL, Granary granary){
+
+        Granary buldingFound=null;
+        int index=0;
+
+        if (!buldingsL.isEmpty()){
+            for (int i=0;i<buldingsL.size();i++) {
+                if (buldingsL.get(i) instanceof Granary ) {
+                    buldingFound = (Granary) buldingsL.get(i);
+                    index=i;
+                    break;
+                } else
+                    System.out.println("szukam budynku");
+            }
+        }else {
+            System.out.println("nie wczytano listy budynkow");
+            index=99999;
+        }
+        return buldingFound;
+    }
+
+    //ta metoda usuwa spichlerz z listy buldingsL !!!
+    public static int findGranarI (ArrayList<Bulding> buldingsL, Granary granary){
+
+        Granary buldingFound=null;
+        int index=0;
+
+        if (!buldingsL.isEmpty()){
+            for (int i=0;i<buldingsL.size();i++) {
+                if (buldingsL.get(i) instanceof Granary ) {
+                    buldingFound = (Granary) buldingsL.get(i);
+                    index=i;
+                    buldingsL.remove(i);
+                    break;
+                } else
+                    System.out.println("szukam budynku");
+            }
+        }else {
+            System.out.println("nie wczytano listy budynkow");
+            index=99999;
+        }
+        return index;
+    }
 
 
         public double getGrainCapacity_kg () {

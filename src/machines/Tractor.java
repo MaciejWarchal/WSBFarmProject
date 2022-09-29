@@ -52,11 +52,52 @@ public class Tractor extends Machine implements Serializable {
         return tractor;
     }
 
-    public void useTractor(ArrayList<Machine> machinesL, Farm farm, Field field){
-        if (this.isReadyToUse){
+    public static int tractorFindI (ArrayList<Machine> machinesL){
 
+        int tractorFoundInIndex=9999999;
+        Tractor tractor=null;
+
+        if (!machinesL.isEmpty()){
+            for (int i=0;i<machinesL.size();i++) {
+                if (machinesL.get(i)instanceof Tractor) {
+                    tractor = (Tractor) machinesL.get(i);
+                } else
+                    System.out.println("nie znaleziono maszyny");
+            }
+        }else {
+            System.out.println("nie wczytano listy maszyn");
+            tractor=null;
         }
 
+        return tractorFoundInIndex;
+    }
+
+    public static Tractor tractorFind (ArrayList<Machine> machinesL){
+
+        int tractorFoundInIndex=9999999;
+        Tractor tractor=null;
+
+        if (!machinesL.isEmpty()){
+            for (int i=0;i<machinesL.size();i++) {
+                if (machinesL.get(i)instanceof Tractor) {
+                    tractor = (Tractor) machinesL.get(i);
+                } else
+                    System.out.println("nie znaleziono maszyny");
+            }
+        }else {
+            System.out.println("nie wczytano listy maszyn");
+            tractor=null;
+        }
+
+        return tractor;
+    }
+
+    public void useTractor(ArrayList<Machine> machinesL, Farm farm, Field field){
+        if (this.isReadyToUse){
+            double fuelExpenses=(field.getArea_m2()*this.getFuelconsumption_l_Per_h()*this.getFuelPrice())/this.getPerformance_m2_Per_h();
+            farm.setCash(farm.getCash()-fuelExpenses);
+            System.out.println("traktor zuzyl paliwa za "+fuelExpenses+" zl");
+        }
     }
 
 
