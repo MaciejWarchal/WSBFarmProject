@@ -112,6 +112,7 @@ public class MainMenu extends FileSystem {
                 System.out.println("7. kup maszyne");
                 System.out.println("8. zarządzanie polami");
                 System.out.println("9. informacja o budynkach na farmie");
+                System.out.println("10. wyjście z programu");
 
                 op = getInt();
                 //  caly switch w petli

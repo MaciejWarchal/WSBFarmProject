@@ -74,7 +74,7 @@ public class CombineHarvester extends Machine implements Serializable {
 
         if (!machinesL.isEmpty()){
             for (int i=0;i<machinesL.size();i++) {
-                if (machinesL.get(i)instanceof Tractor) {
+                if (machinesL.get(i)instanceof CombineHarvester) {
                     combineHarvester = (CombineHarvester) machinesL.get(i);
                 } else
                     System.out.println("nie znaleziono maszyny");
